@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Wfrley(Task)</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_new_order">إضافة طلب جديد</string>
+    <string name="all_orders">كل الطلبات</string>
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginBottom="8dp"
+    app:strokeColor="@color/appWhite"
+    app:strokeWidth="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_shop"
+            app:layout_constraintBottom_toBottomOf="@id/circle"
+            app:layout_constraintEnd_toEndOf="@id/circle"
+            app:layout_constraintStart_toStartOf="@id/circle"
+            app:layout_constraintTop_toTopOf="@id/circle" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/circle"
+            app:layout_constraintEnd_toStartOf="@id/circle"
+            app:layout_constraintTop_toTopOf="@id/circle">
+
+            <TextView
+                android:id="@+id/txtOrderDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/appBlack"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="29 مارس 2024 , 5:50" />
+
+            <TextView
+                android:id="@+id/txtClientName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/appBlack"
+                app:layout_constraintEnd_toEndOf="@id/txtOrderDate"
+                app:layout_constraintTop_toBottomOf="@id/txtOrderDate"
+                tools:text="أحمد محمد" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtOrderPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/circle"
+            app:layout_constraintStart_toStartOf="parent"
+
+            tools:text="300 ج.م" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
