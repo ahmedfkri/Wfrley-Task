@@ -3,4 +3,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_order">إضافة طلب جديد</string>
     <string name="all_orders">كل الطلبات</string>
+    <string name="check_number">فاتورة رقم</string>
+    <string name="order_details">بيانات الطلب</string>
+    <string name="client_name">اسم العميل</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="adress">العنوان</string>
+    <string name="order_elemnts">عناصر الطلب</string>
+    <string name="operations">العمليات</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="total_discount">إجمالي الخصم</string>
+    <string name="total_price">المبلغ الإجمالي</string>
 </resources>

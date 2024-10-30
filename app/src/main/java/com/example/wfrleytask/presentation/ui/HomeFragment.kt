@@ -6,9 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wfrleytask.R
 import com.example.wfrleytask.databinding.FragmentHomeBinding
 import com.example.wfrleytask.model.PagingRequest
 import com.example.wfrleytask.presentation.adapter.OrdersAdapter
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private val ordersViewModel: OrdersViewModel by viewModels()
+    lateinit var ordersViewModel: OrdersViewModel
     lateinit var ordersAdapter: OrdersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        ordersViewModel = (activity as MainActivity).ordersViewModel
+
         setupRecyclerView()
+        setupItemClickListener()
+
 
         val request = PagingRequest("8445bef7-af04-4707-a514-13636663fd5a", 1, 10, 0, 5)
 
@@ -52,6 +57,15 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupItemClickListener() {
+        ordersAdapter.onItemClick = {
+            val bundle = Bundle().apply {
+                putInt("item_id", it.id!!)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_orderDetailFragment, bundle)
+
+        }
+    }
 
 
     private fun setupRecyclerView() {

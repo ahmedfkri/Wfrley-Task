@@ -13,6 +13,7 @@ import com.example.wfrleytask.util.DateTimeUtil
 
 class OrdersAdapter : ListAdapter<Item, OrdersAdapter.ItemViewHolder>(OrdersDiffUtil()) {
 
+    var onItemClick: ((Item) -> Unit)? = null
 
     class OrdersDiffUtil : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
@@ -35,7 +36,7 @@ class OrdersAdapter : ListAdapter<Item, OrdersAdapter.ItemViewHolder>(OrdersDiff
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OrdersAdapter.ItemViewHolder {
+    ): ItemViewHolder {
         return ItemViewHolder(
             OrderListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -45,12 +46,17 @@ class OrdersAdapter : ListAdapter<Item, OrdersAdapter.ItemViewHolder>(OrdersDiff
         )
     }
 
-    override fun onBindViewHolder(holder: OrdersAdapter.ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = differ.currentList[position]
         holder.binding.apply {
             txtOrderPrice.text = currentItem.grandTotal.toString() + " ج.م "
             txtOrderDate.text = DateTimeUtil(currentItem.createdDate.toString())
-            txtClientName.text = currentItem.customerUser?.displayName ?: "عميل"
+            currentItem.customerUser?.displayName.let {
+                txtClientName.text = it
+            }
+        }
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(currentItem)
         }
     }
 

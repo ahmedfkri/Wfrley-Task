@@ -3,9 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#00ABB6</color>
+    <color name="primaryVariant">#EEFCFC</color>
     <color name="appBlue">#F9FFFF</color>
     <color name="appBlack">#1F1F1F</color>
     <color name="appWhite">#EEEEEE</color>
+    <color name="background">#FAFAFA</color>
 
 
 </resources>
