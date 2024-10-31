@@ -1,5 +1,6 @@
 package com.example.wfrleytask.di
 
+import com.example.wfrleytask.data.local.OrdersDao
 import com.example.wfrleytask.data.remote.ApiClient
 import com.example.wfrleytask.repository.OrdersRepository
 import dagger.Module
@@ -12,8 +13,8 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
     @Provides
-    fun provideOrderRepository(apiService: ApiClient): OrdersRepository {
-        return OrdersRepository(apiService)
+    fun provideOrderRepository(apiService: ApiClient, ordersDao: OrdersDao): OrdersRepository {
+        return OrdersRepository(apiService, ordersDao)
     }
 
 

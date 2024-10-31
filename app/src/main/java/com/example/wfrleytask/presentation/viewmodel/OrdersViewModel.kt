@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wfrleytask.model.CreateOrderRequest
 import com.example.wfrleytask.model.CreateOrderResponse
-import com.example.wfrleytask.model.Item
 import com.example.wfrleytask.model.OrderDetail
 import com.example.wfrleytask.model.OrderDetailsResponse
+import com.example.wfrleytask.model.OrderEntity
 import com.example.wfrleytask.model.PagingRequest
 import com.example.wfrleytask.model.Product
 import com.example.wfrleytask.model.SearchProductRequest
@@ -33,7 +33,7 @@ constructor(private val repository: OrdersRepository) : ViewModel() {
     val selectedProducts: StateFlow<List<OrderDetail>> = _selectedProducts
 
 
-    fun getAllOrders(request: PagingRequest): Flow<List<Item>> {
+    fun getAllOrders(request: PagingRequest): Flow<List<OrderEntity>> {
         return repository.getAllOrders(request)
     }
 

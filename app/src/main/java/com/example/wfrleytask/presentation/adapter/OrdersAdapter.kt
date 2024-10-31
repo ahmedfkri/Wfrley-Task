@@ -7,20 +7,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wfrleytask.databinding.OrderListItemBinding
-import com.example.wfrleytask.model.Item
+import com.example.wfrleytask.model.OrderEntity
 import com.example.wfrleytask.util.DateTimeUtil
 
 
-class OrdersAdapter : ListAdapter<Item, OrdersAdapter.ItemViewHolder>(OrdersDiffUtil()) {
+class OrdersAdapter : ListAdapter<OrderEntity, OrdersAdapter.ItemViewHolder>(OrdersDiffUtil()) {
 
-    var onItemClick: ((Item) -> Unit)? = null
+    var onItemClick: ((OrderEntity) -> Unit)? = null
 
-    class OrdersDiffUtil : DiffUtil.ItemCallback<Item>() {
-        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+    class OrdersDiffUtil : DiffUtil.ItemCallback<OrderEntity>() {
+        override fun areItemsTheSame(oldItem: OrderEntity, newItem: OrderEntity): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+        override fun areContentsTheSame(oldItem: OrderEntity, newItem: OrderEntity): Boolean {
             return oldItem == newItem
         }
     }
@@ -49,9 +49,9 @@ class OrdersAdapter : ListAdapter<Item, OrdersAdapter.ItemViewHolder>(OrdersDiff
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = differ.currentList[position]
         holder.binding.apply {
-            txtOrderPrice.text = "${currentItem.grandTotal.toString()} ج.م "
-            txtOrderDate.text = DateTimeUtil(currentItem.createdDate.toString())
-            currentItem.customerUser?.displayName.let {
+            txtOrderPrice.text = "${currentItem.price} ج.م "
+            txtOrderDate.text = DateTimeUtil(currentItem.date)
+            currentItem.clientName.let {
                 txtClientName.text = it
             }
         }
