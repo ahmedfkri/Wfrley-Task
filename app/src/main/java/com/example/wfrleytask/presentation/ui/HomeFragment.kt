@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.wfrleytask.R
 import com.example.wfrleytask.databinding.FragmentHomeBinding
 import com.example.wfrleytask.model.PagingRequest
 import com.example.wfrleytask.presentation.adapter.OrdersAdapter
 import com.example.wfrleytask.presentation.viewmodel.OrdersViewModel
+import com.example.wfrleytask.util.Constants.MERCHANT_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -25,8 +27,13 @@ class HomeFragment : Fragment() {
     lateinit var ordersViewModel: OrdersViewModel
     lateinit var ordersAdapter: OrdersAdapter
 
+    private var currentPage = 1
+    private var isLoading = false
+    private var isLastPage = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ordersViewModel = (activity as MainActivity).ordersViewModel
     }
 
     override fun onCreateView(
@@ -40,20 +47,29 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ordersViewModel = (activity as MainActivity).ordersViewModel
 
         setupRecyclerView()
         setupItemClickListener()
         onCreateOrderClick()
+        loadOrders()
 
+    }
 
-        val request = PagingRequest("8445bef7-af04-4707-a514-13636663fd5a", 1, 10, 0, 5)
+    private fun loadOrders() {
+        if (isLoading || isLastPage) return
+        isLoading = true
 
-
+        val request = PagingRequest(MERCHANT_ID, currentPage, 10, 0, 5)
         viewLifecycleOwner.lifecycleScope.launch {
-            ordersViewModel.getAllOrders(request).collect {
-                ordersAdapter.differ.submitList(it)
-                Log.d("TAG", "onViewCreated: $it")
+            ordersViewModel.getAllOrders(request).collect { orders ->
+                if (orders.isNotEmpty()) {
+                    ordersAdapter.differ.submitList(ordersAdapter.differ.currentList + orders)
+                    currentPage++
+                } else {
+                    isLastPage = true
+                }
+                isLoading = false
+                Log.d("tagtagtag", "onViewCreated: $orders")
             }
         }
     }
@@ -79,6 +95,16 @@ class HomeFragment : Fragment() {
         ordersAdapter = OrdersAdapter()
         binding.rvOrders.adapter = ordersAdapter
         binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.rvOrders.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == ordersAdapter.itemCount - 1) {
+                    loadOrders()
+                }
+            }
+        })
     }
 
 }

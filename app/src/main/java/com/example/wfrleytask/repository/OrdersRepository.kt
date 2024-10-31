@@ -30,6 +30,8 @@ constructor(private val apiClient: ApiClient) {
         if (response.isSuccessful) {
             emit(response.body()!!.items)
         }
+    }.catch { e ->
+        Log.e("OrderRepository", "Error fetching All Orders", e)
     }
 
     fun getOrderDetails(orderId: Int, customerId: String): Flow<OrderDetailsResponse> = flow {

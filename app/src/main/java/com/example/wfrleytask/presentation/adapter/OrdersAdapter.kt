@@ -49,7 +49,7 @@ class OrdersAdapter : ListAdapter<Item, OrdersAdapter.ItemViewHolder>(OrdersDiff
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = differ.currentList[position]
         holder.binding.apply {
-            txtOrderPrice.text = currentItem.grandTotal.toString() + " ج.م "
+            txtOrderPrice.text = "${currentItem.grandTotal.toString()} ج.م "
             txtOrderDate.text = DateTimeUtil(currentItem.createdDate.toString())
             currentItem.customerUser?.displayName.let {
                 txtClientName.text = it
