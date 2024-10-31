@@ -1,9 +1,9 @@
 package com.example.wfrleytask.model
 
-data class ProductInvetory(
+data class ProductInventory(
     val id: Int,
     val inventoryId: Int,
-    val price: Int,
+    val price: Double,
     val priceAfterDiscount: Double,
     val productId: Int,
     val quantity: Double,

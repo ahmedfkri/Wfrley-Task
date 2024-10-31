@@ -13,4 +13,10 @@
     <string name="payment_method">طريقة الدفع</string>
     <string name="total_discount">إجمالي الخصم</string>
     <string name="total_price">المبلغ الإجمالي</string>
+    <string name="create_new_order">إنشاء طلب جديد</string>
+    <string name="search_with_name_or_barcode">بحث بالإسم أو الباركود</string>
+    <string name="add_to_order">أضف إلى الطلب</string>
+    <string name="finish_order">إتمام الطلب</string>
+    <string name="cash">نقدي</string>
+    <string name="amount_paid">المبلغ المدفوع</string>
 </resources>

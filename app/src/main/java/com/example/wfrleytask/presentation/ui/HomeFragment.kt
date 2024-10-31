@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
 
         setupRecyclerView()
         setupItemClickListener()
+        onCreateOrderClick()
 
 
         val request = PagingRequest("8445bef7-af04-4707-a514-13636663fd5a", 1, 10, 0, 5)
@@ -54,6 +55,12 @@ class HomeFragment : Fragment() {
                 ordersAdapter.differ.submitList(it)
                 Log.d("TAG", "onViewCreated: $it")
             }
+        }
+    }
+
+    private fun onCreateOrderClick() {
+        binding.cvAddOrder.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_createOrderFragment)
         }
     }
 

@@ -89,6 +89,8 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
 
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
 
     implementation(libs.glide)
 }

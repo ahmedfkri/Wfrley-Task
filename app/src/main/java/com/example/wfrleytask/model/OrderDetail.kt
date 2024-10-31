@@ -1,12 +1,20 @@
 package com.example.wfrleytask.model
 
 data class OrderDetail(
-    val id: Int,
-    val product: Product,
-    val productCustomizationId: Any,
-    val productCustomizations: Any,
-    val quantity: Double,
-    val rowPriceAfterDiscount: Double,
-    val rowTotal: Double,
-    val syncSucceed: Boolean
+    var id: Int,
+    var product: Product,
+    var productCustomizationId: Any,
+    var productCustomizations: Any,
+    var quantity: Double,
+    var rowPriceAfterDiscount: Double,
+    var rowTotal: Double,
+    var syncSucceed: Boolean
 )
+
+fun OrderDetail.toOrderDetailRequest(): OrderDetailRequest {
+    return OrderDetailRequest(
+        productId = id,
+        quantity = quantity,
+        rowPriceAfterDiscount = rowPriceAfterDiscount,
+        rowTotal = rowTotal)
+}

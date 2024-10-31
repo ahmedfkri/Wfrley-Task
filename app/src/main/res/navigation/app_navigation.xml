@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
@@ -23,5 +26,25 @@
             android:name="item_id"
             app:argType="integer"
             android:defaultValue="3106" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="com.example.wfrleytask.presentation.ui.CreateOrderFragment"
+        android:label="fragment_create_order"
+        tools:layout="@layout/fragment_create_order" >
+        <action
+            android:id="@+id/action_createOrderFragment_to_finishOrderFragment"
+            app:destination="@id/finishOrderFragment" />
+        <action
+            android:id="@+id/action_createOrderFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishOrderFragment"
+        android:name="com.example.wfrleytask.presentation.ui.FinishOrderFragment"
+        android:label="fragment_finish_order"
+        tools:layout="@layout/fragment_finish_order" />
 </navigation>
