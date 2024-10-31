@@ -1,18 +1,19 @@
 package com.example.wfrleytask.model
 
+
 data class Item(
-    val cashierComment: Any?,
-    val cashierUser: Any?,
-    val couponCode: String?,
-    val createdDate: String?,
-    val customerServiceComment: Any?,
+    val cashierComment: Any? ="",
+    val cashierUser: Any? ="",
+    val couponCode: String? ="",
+    val createdDate: String? ="",
+    val customerServiceComment: Any? ="",
     val customerServiceUser: CustomerServiceUser?,
     val customerUser: CustomerUser?,
     val deliveryUser: Any?,
     val discountAmount: Int?,
     val fromPos: Boolean?,
     val grandTotal: Double?,
-    val id: Int?,
+    val id: Int,
     val idOnline: Any?,
     val inventories: Inventories?,
     val merchantId: String?,
@@ -34,3 +35,13 @@ data class Item(
     val totalRefunded: Int?,
     val updatedDate: String?
 )
+
+fun Item.toOrderEntity(): OrderEntity {
+    return OrderEntity(
+        id = id,
+        date = createdDate ?: "",
+        price = grandTotal ?: 0.0,
+        clientName = customerUser?.displayName ?: ""
+    )
+
+}

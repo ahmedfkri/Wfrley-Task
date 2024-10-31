@@ -63,48 +63,55 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             ordersViewModel.getAllOrders(request).collect { orders ->
                 if (orders.isNotEmpty()) {
-                    ordersAdapter.differ.submitList(ordersAdapter.differ.currentList + orders)
-                    currentPage++
-                } else {
-                    isLastPage = true
-                }
-                isLoading = false
-                Log.d("tagtagtag", "onViewCreated: $orders")
-            }
-        }
-    }
-
-    private fun onCreateOrderClick() {
-        binding.cvAddOrder.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_createOrderFragment)
-        }
-    }
-
-    private fun setupItemClickListener() {
-        ordersAdapter.onItemClick = {
-            val bundle = Bundle().apply {
-                putInt("item_id", it.id!!)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_orderDetailFragment, bundle)
-
-        }
-    }
-
-
-    private fun setupRecyclerView() {
-        ordersAdapter = OrdersAdapter()
-        binding.rvOrders.adapter = ordersAdapter
-        binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
-
-        binding.rvOrders.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                if (layoutManager.findLastCompletelyVisibleItemPosition() == ordersAdapter.itemCount - 1) {
-                    loadOrders()
+                    val currentList = ordersAdapter.differ.currentList
+                    val filteredOrders = orders.filter { newOrder ->
+                        currentList.none { it.id == newOrder.id }
+                    }
+                        ordersAdapter.differ.submitList(currentList + filteredOrders)
+                        currentPage++
+                    } else {
+                        isLastPage = true
+                    }
+                    isLoading = false
+                    Log.d("tagtagtag", "onViewCreated: $orders")
                 }
             }
-        })
-    }
+        }
 
-}
+        private fun onCreateOrderClick() {
+            binding.cvAddOrder.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_createOrderFragment)
+            }
+        }
+
+        private fun setupItemClickListener() {
+            ordersAdapter.onItemClick = {
+                val bundle = Bundle().apply {
+                    putInt("item_id", it.id)
+                }
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_orderDetailFragment,
+                    bundle
+                )
+
+            }
+        }
+
+
+        private fun setupRecyclerView() {
+            ordersAdapter = OrdersAdapter()
+            binding.rvOrders.adapter = ordersAdapter
+            binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
+
+            binding.rvOrders.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    if (layoutManager.findLastCompletelyVisibleItemPosition() == ordersAdapter.itemCount - 1) {
+                        loadOrders()
+                    }
+                }
+            })
+        }
+
+    }
