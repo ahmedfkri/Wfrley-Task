@@ -2,9 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="170dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_width="155dp"
+    android:layout_height="165dp"
+    android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,12 +27,14 @@
 
         <ImageView
             android:id="@+id/imgProduct"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/im_product"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/circle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/txtPrice"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary" />
 
         <TextView
             android:id="@+id/txtProductName"
@@ -41,9 +43,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/appBlack"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgProduct"
             tools:text="سبيرو سباتس" />
 
@@ -51,7 +51,6 @@
             android:id="@+id/txtProductCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/imgProduct"
             app:layout_constraintTop_toBottomOf="@id/txtProductName"
             tools:text="15 قطعة" />
@@ -59,41 +58,42 @@
         <Button
             android:id="@+id/btnAddToOrder"
             android:layout_width="0dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/btn_blue"
             android:text="@string/add_to_order"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtProductCount" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/loSelected"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="horizontal"
+            android:paddingHorizontal="4dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtProductCount">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMin"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:background="@drawable/btn_blue"
                 app:icon="@drawable/ic_min"
                 app:iconGravity="textTop" />
 
             <TextView
                 android:id="@+id/txtProductCurrentCount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="2"
                 android:textAlignment="center"
                 android:textColor="@color/appBlack"
@@ -103,8 +103,9 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPlus"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:background="@drawable/btn_blue"
                 app:icon="@drawable/ic_plus"
                 app:iconGravity="textStart"
                 app:iconPadding="2dp" />

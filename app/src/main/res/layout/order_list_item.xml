@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:importantForAccessibility="no"
             android:src="@drawable/circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +26,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_shop"
             app:layout_constraintBottom_toBottomOf="@id/circle"
             app:layout_constraintEnd_toEndOf="@id/circle"
@@ -32,47 +34,48 @@
             app:layout_constraintTop_toTopOf="@id/circle" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/loDatePrice"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@id/circle"
             app:layout_constraintEnd_toStartOf="@id/circle"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/circle">
 
             <TextView
-                android:id="@+id/txtOrderDate"
+                android:id="@+id/txtOrderPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/circle"
+                tools:text="300 ج.م" />
+
+            <TextView
+                android:id="@+id/txtOrderDate"
+                android:layout_width="0dp"
+                android:lineSpacingMultiplier="1.25"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="@color/appBlack"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="29 مارس 2024 , 5:50" />
-
-            <TextView
-                android:id="@+id/txtClientName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/appBlack"
-                app:layout_constraintEnd_toEndOf="@id/txtOrderDate"
-                app:layout_constraintTop_toBottomOf="@id/txtOrderDate"
-                tools:text="أحمد محمد" />
-
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txtOrderPrice"
+            android:id="@+id/txtClientName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:textColor="@color/primary"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/circle"
-            app:layout_constraintStart_toStartOf="parent"
-
-            tools:text="300 ج.م" />
-
+            android:layout_gravity="end"
+            android:textColor="@color/appBlack"
+            app:layout_constraintEnd_toEndOf="@id/loDatePrice"
+            app:layout_constraintTop_toBottomOf="@id/loDatePrice"
+            tools:text="أحمد محمد" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -45,8 +45,18 @@ class OrderDetailFragment : Fragment() {
 
         getOrderDetails(itemId)
         setupRecyclerView()
+        onBack()
 
 
+    }
+
+    private fun onBack() {
+        binding.btnBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        binding.btnHome.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
 
@@ -64,17 +74,24 @@ class OrderDetailFragment : Fragment() {
                 Log.d("TAG", "getOrderDetails: $response")
                 if (response != null) {
                     binding.apply {
-                        txtBillNumber.text = response.id.toString()
-                        txtClientName.text = response.customerUser?.displayName ?: "Client"
+                        binding.scrollOrderDetail.visibility = View.VISIBLE
+                        txtBillNumber.text = buildString {
+                            append(response.id)
+                            append("#")
+                        }
+                        txtClientName.text = response.customerUser?.displayName ?: "عميل"
                         txtClientPhone.text = response.shippingAddresses[0].telephone
                         txtClientAdress.text = response.shippingAddresses[0].cityName
                         txtPaymentMethod.text =
-                            if (response.paymentMethod == 1) "نقدي" else "زافي"
+                            if (response.paymentMethod == 1) "نقدي" else "فيزا"
                         txtTotalDiscount.text = response.totalRefunded.toString()
                         txtTotalPrice.text = response.grandTotal.toString()
-                        txtTodayDate.text = DateTimeUtil(response.createdDate.toString())
+                        txtTodayDate.text =
+                            DateTimeUtil.formatDateToArabic(response.createdDate.toString())
                     }
                     orderDetailsAdapter.differ.submitList(response.orderDetails)
+                } else {
+                    binding.scrollOrderDetail.visibility = View.GONE
                 }
             }
         }

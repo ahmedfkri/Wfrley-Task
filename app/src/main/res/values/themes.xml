@@ -1,9 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources >
     <!-- Base application theme. -->
     <style name="Base.Theme.WfrleyTask" parent="Theme.Material3.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/primary</item>
         <item name="fontFamily">@font/lama_font</item>
+        <item name="android:statusBarColor">@color/primary</item>
     </style>
 
     <style name="Theme.WfrleyTask" parent="Base.Theme.WfrleyTask" />

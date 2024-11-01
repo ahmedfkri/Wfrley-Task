@@ -16,6 +16,7 @@ import com.example.wfrleytask.model.PagingRequest
 import com.example.wfrleytask.presentation.adapter.OrdersAdapter
 import com.example.wfrleytask.presentation.viewmodel.OrdersViewModel
 import com.example.wfrleytask.util.Constants.MERCHANT_ID
+import com.example.wfrleytask.util.DateTimeUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,11 +49,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        setTodaysDate()
         setupRecyclerView()
         setupItemClickListener()
         onCreateOrderClick()
         loadOrders()
 
+    }
+
+    private fun setTodaysDate() {
+        binding.txtTodayDate.text = DateTimeUtil.getTodayDate()
     }
 
     private fun loadOrders() {
@@ -67,51 +73,51 @@ class HomeFragment : Fragment() {
                     val filteredOrders = orders.filter { newOrder ->
                         currentList.none { it.id == newOrder.id }
                     }
-                        ordersAdapter.differ.submitList(currentList + filteredOrders)
-                        currentPage++
-                    } else {
-                        isLastPage = true
-                    }
-                    isLoading = false
-                    Log.d("tagtagtag", "onViewCreated: $orders")
+                    ordersAdapter.differ.submitList(currentList + filteredOrders)
+                    currentPage++
+                } else {
+                    isLastPage = true
                 }
+                isLoading = false
+                Log.d("tagtagtag", "onViewCreated: $orders")
             }
         }
-
-        private fun onCreateOrderClick() {
-            binding.cvAddOrder.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_createOrderFragment)
-            }
-        }
-
-        private fun setupItemClickListener() {
-            ordersAdapter.onItemClick = {
-                val bundle = Bundle().apply {
-                    putInt("item_id", it.id)
-                }
-                findNavController().navigate(
-                    R.id.action_homeFragment_to_orderDetailFragment,
-                    bundle
-                )
-
-            }
-        }
-
-
-        private fun setupRecyclerView() {
-            ordersAdapter = OrdersAdapter()
-            binding.rvOrders.adapter = ordersAdapter
-            binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
-
-            binding.rvOrders.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    if (layoutManager.findLastCompletelyVisibleItemPosition() == ordersAdapter.itemCount - 1) {
-                        loadOrders()
-                    }
-                }
-            })
-        }
-
     }
+
+    private fun onCreateOrderClick() {
+        binding.cvAddOrder.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_createOrderFragment)
+        }
+    }
+
+    private fun setupItemClickListener() {
+        ordersAdapter.onItemClick = {
+            val bundle = Bundle().apply {
+                putInt("item_id", it.id)
+            }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_orderDetailFragment,
+                bundle
+            )
+
+        }
+    }
+
+
+    private fun setupRecyclerView() {
+        ordersAdapter = OrdersAdapter()
+        binding.rvOrders.adapter = ordersAdapter
+        binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.rvOrders.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == ordersAdapter.itemCount - 1) {
+                    loadOrders()
+                }
+            }
+        })
+    }
+
+}

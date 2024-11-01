@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imgHeader"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:importantForAccessibility="no"
         android:scaleType="fitXY"
         android:src="@drawable/img_header_white"
@@ -29,9 +29,8 @@
 
         <ImageView
             android:id="@+id/btnHome"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_home" />
 
@@ -42,6 +41,7 @@
             android:layout_weight="1"
             android:textAlignment="textEnd"
             android:textSize="16sp"
+            android:textStyle="bold"
             tools:text="123456789" />
 
         <TextView
@@ -57,10 +57,10 @@
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_weight="1"
-            android:importantForAccessibility="no" android:src="@drawable/ic_arrow_back" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_arrow_back" />
 
 
     </LinearLayout>
@@ -68,6 +68,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:id="@+id/scrollOrderDetail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -84,12 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                tools:text="الإثنين 25 اكتوبر 2023 "
                 android:textColor="@color/appBlack"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@id/glEndInner"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="الإثنين 25 اكتوبر 2023 " />
 
             <TextView
                 android:id="@+id/txtTodayTime"
@@ -116,8 +117,7 @@
                     android:layout_height="match_parent"
                     android:gravity="end"
                     android:orientation="vertical"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="16dp">
+                    android:paddingHorizontal="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -196,7 +196,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvOrderElemnts"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="200dp"
                 app:layout_constraintBottom_toTopOf="@id/loOperations"
                 app:layout_constraintEnd_toEndOf="@id/glEndInner"
                 app:layout_constraintStart_toStartOf="@id/glStartInner"
@@ -207,15 +208,15 @@
             <LinearLayout
                 android:id="@+id/loOperations"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:background="@color/primaryVariant"
                 android:gravity="end"
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvOrderElemnts">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -232,9 +233,9 @@
                     <TextView
                         android:id="@+id/txtPaymentMethod"
                         android:layout_width="0dp"
+                        android:gravity="end"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="textEnd"
                         android:textSize="16sp"
                         tools:text="نقدي" />
 
@@ -257,7 +258,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="textEnd"
+                        android:gravity="end"
                         android:textSize="16sp"
                         tools:text="148 جنيه مصري" />
 
@@ -279,7 +280,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="textEnd"
+                        android:gravity="end"
                         android:textColor="@color/primary"
                         android:textSize="16sp"
                         android:textStyle="bold"

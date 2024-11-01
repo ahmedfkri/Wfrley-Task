@@ -28,6 +28,7 @@ class CreateOrderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = (activity as MainActivity).ordersViewModel
 
     }
 
@@ -42,13 +43,22 @@ class CreateOrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (activity as MainActivity).ordersViewModel
 
         setupRecyclerView()
         onSearch()
         fetchSelectedProducts()
         onFinishOrderClick()
+        onBackClick()
 
+    }
+
+    private fun onBackClick() {
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_createOrderFragment_to_homeFragment)
+        }
+        binding.btnHome.setOnClickListener {
+            findNavController().navigate(R.id.action_createOrderFragment_to_homeFragment)
+        }
     }
 
     private fun onFinishOrderClick() {
