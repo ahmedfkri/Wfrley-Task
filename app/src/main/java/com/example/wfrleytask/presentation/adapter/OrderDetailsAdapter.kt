@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.wfrleytask.databinding.ElementListItemBinding
 import com.example.wfrleytask.model.OrderDetail
 
-class OrderDetailsAdapter : RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder>() {
+class OrderDetailsAdapter() : RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder>() {
+
 
 
     class DetailsDiffUtil : DiffUtil.ItemCallback<OrderDetail>() {
@@ -42,12 +42,20 @@ class OrderDetailsAdapter : RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val currentItem = differ.currentList[position].product
+        val currentProduct = differ.currentList[position].product
+        val currentElement = differ.currentList[position]
         holder.binding.apply {
-            txtElemntName.text = currentItem.name
-           //txtElementDetail.text = currentItem.productCategories.toString()
-            txtElementPrice.text = currentItem.price.toString()
-            Glide.with(holder.itemView).load(currentItem.image).into(imgElement)
+            txtElemntName.text = currentProduct.name
+            txtElementPrice.text = currentElement.product.price.toString()
+            txtElementDetail.text = buildString {
+                append(currentElement.quantity.toString())
+                append(" قطع")
+                append(" * ")
+                append(currentProduct.price.toString())
+                append(" جنيه ")
+
+            }
+
         }
 
     }

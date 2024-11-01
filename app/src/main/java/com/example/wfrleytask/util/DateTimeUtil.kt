@@ -7,8 +7,7 @@ import java.util.Locale
 
 object DateTimeUtil {
 
-    operator fun invoke(dateString: String): String {
-
+    fun formatDateToArabic(dateString: String): String {
         try {
 
             val parsedDate = LocalDateTime.parse(
@@ -20,9 +19,15 @@ object DateTimeUtil {
             return parsedDate.format(formatter)
         } catch (Exception: Exception) {
             Log.d("TAG", "invoke: $Exception")
-            return " "
+            return "في الماضي"
         }
 
-
     }
+
+    fun getTodayDate(): String {
+        val today = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("ar"))
+        return today.format(formatter)
+    }
+
 }

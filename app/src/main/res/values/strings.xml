@@ -19,4 +19,5 @@
     <string name="finish_order">إتمام الطلب</string>
     <string name="cash">نقدي</string>
     <string name="amount_paid">المبلغ المدفوع</string>
+    <string name="store_name">متجر عيد السلام</string>
 </resources>

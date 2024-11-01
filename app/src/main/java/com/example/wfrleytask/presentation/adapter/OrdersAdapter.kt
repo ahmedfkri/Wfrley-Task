@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wfrleytask.databinding.OrderListItemBinding
 import com.example.wfrleytask.model.OrderEntity
 import com.example.wfrleytask.util.DateTimeUtil
+import java.util.Locale
 
 
 class OrdersAdapter : ListAdapter<OrderEntity, OrdersAdapter.ItemViewHolder>(OrdersDiffUtil()) {
@@ -49,8 +50,11 @@ class OrdersAdapter : ListAdapter<OrderEntity, OrdersAdapter.ItemViewHolder>(Ord
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = differ.currentList[position]
         holder.binding.apply {
-            txtOrderPrice.text = "${currentItem.price} ج.م "
-            txtOrderDate.text = DateTimeUtil(currentItem.date)
+            txtOrderPrice.text = buildString {
+        append(currentItem.price.formatWithoutTrailingZeros())
+        append(" ج.م ")
+    }
+            txtOrderDate.text = DateTimeUtil.formatDateToArabic(currentItem.date)
             currentItem.clientName.let {
                 txtClientName.text = it
             }
@@ -61,4 +65,12 @@ class OrdersAdapter : ListAdapter<OrderEntity, OrdersAdapter.ItemViewHolder>(Ord
     }
 
     override fun getItemCount() = differ.currentList.size
+}
+
+fun Double.formatWithoutTrailingZeros(): String {
+    return if (this % 1.0 == 0.0) {
+        this.toInt().toString()
+    } else {
+        String.format(Locale.getDefault(),"%.2f", this)
+    }
 }

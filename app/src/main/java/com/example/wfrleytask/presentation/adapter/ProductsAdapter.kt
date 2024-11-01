@@ -4,13 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.wfrleytask.R
 import com.example.wfrleytask.databinding.ProductListItemBinding
 import com.example.wfrleytask.model.OrderDetail
@@ -19,13 +17,9 @@ import com.example.wfrleytask.presentation.viewmodel.OrdersViewModel
 
 
 class ProductsAdapter(
-    val viewModel: OrdersViewModel,
-    val lifecycleOwner: LifecycleOwner
+    private val viewModel: OrdersViewModel,
+    lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
-
-    var onAddToOrder: ((Product) -> Unit)? = null
-    var onQuantityChanged: ((Product) -> Unit)? = null
-    private val items: MutableList<OrderDetail> = mutableListOf()
 
 
     class ProductDiffUtil : DiffUtil.ItemCallback<Product>() {
@@ -91,7 +85,6 @@ class ProductsAdapter(
             txtProductName.text = currentProduct.name ?: ""
             txtPrice.text = currentProduct.price?.toString() ?: ""
             txtProductCount.text = currentProduct.salableQuantity?.toString() ?: ""
-            Glide.with(holder.itemView).load(currentProduct.image).into(imgProduct)
 
             if (isSelected) {
                 btnAddToOrder.visibility = View.GONE
@@ -101,7 +94,6 @@ class ProductsAdapter(
                     strokeColor = holder.itemView.context.getColor(R.color.primary)
                 }
                 txtProductCurrentCount.text = quantity.toString()
-                txtPrice.text = orderDetail?.rowPriceAfterDiscount.toString()
             } else {
                 btnAddToOrder.visibility = View.VISIBLE
                 loSelected.visibility = View.GONE
